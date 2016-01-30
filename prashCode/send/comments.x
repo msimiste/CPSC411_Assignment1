@@ -16,23 +16,23 @@ $newLine = \n
 
 tokens :-
 
-$white+		  	             { skip }
-"%".*$newLine				;
-if						     { if' }
+$white+                      { skip }
+"%".*$newLine                  ;
+if                           { if' }
 then                         { then' }
 while                        { while }
---do                         { do' }
---input                        { input }
---else                         { else' }
+do                           { do' }
+input                        { input }
+else                         { else' }
 begin                        { begin' }
 end                          { end }
 write                        { write }
-$digit+					     { num } 
+$digit+                      { num } 
 $alpha[$alpha$digit]*        { word }
 ":="                         { assign }
 "+"                          { add }
-"-"					         { sub }
-"*"					         { mul }				
+"-"                          { sub }
+"*"                          { mul }
 "/"                          { div' }
 "("                          { lpar }
 ")"                          { rpar }
@@ -171,7 +171,7 @@ tokens str = runAlex str $ do
           
 
 nested_comment :: AlexInput -> Int -> Alex Lexeme
-nested_comment (a,b,f,d) _ = do
+nested_comment input _ = do
   input <- alexGetInput 
   go 1 input
   where      
@@ -186,7 +186,7 @@ nested_comment (a,b,f,d) _ = do
                           '*' -> do
                               case alexGetByte input of
                                 Nothing  -> err input 
-                                --Just(42,input) -> go n (a,b,f,d)                                                    
+                                Just(42,(a,b,f,d)) -> go n (a,b,f,'\42':d)                                                    
                                 Just (47,input) -> go (n-1) input                                
                                 Just (c,input)   -> go n input
                           '\47' -> do
@@ -194,12 +194,20 @@ nested_comment (a,b,f,d) _ = do
                                 Nothing  -> err input
                                 Just (c,input) | c == fromIntegral (ord '*') -> go (n+1) input
                                 Just (c,input)   -> go n input
+                          '\37' -> do
+                                go (n-1) (singleComment input)
+                             
                           c -> go n input
       err input = do 
         alexSetInput input;
         lexError $ "error in nested comment"
 
-
+singleComment :: AlexInput -> AlexInput
+singleComment (a,b,c,(d:e))
+    | d == '\n' = (a,b,c,e)
+    | otherwise = singleComment (a,b,c,e)
+    
+    
 showPosn (AlexPn _ line col) = show line ++ ':': show col
 
 
