@@ -457,7 +457,7 @@ nested_comment input _ = do
                                 Just (c,input)   -> go n input
                           '\37' -> do
                                go (fst retVal) (snd retVal) where
-                               retVal = singleComment n input
+                                   retVal = singleComment n input
                              
                           c -> go n input
       err input = do 
@@ -466,10 +466,9 @@ nested_comment input _ = do
 
 singleComment :: Int -> AlexInput -> (Int, AlexInput)
 singleComment x (a,b,c,(d:e:f))
-    | d == '\n' =  (x, (a,b,c,e:f))
-    | d == '\47' && e == '*' = singleComment (x+1) (a,b,c,f)
-    | d == '*' && e =='\47' = singleComment (x-1) (a,b,c,f)
+    | d == '\n' =  (x, (a,b,c,e:f))    
     | otherwise = singleComment x (a,b,c,(e:f))
+singleComment x s = (x,s)
     
     
 showPosn (AlexPn _ line col) = show line ++ ':': show col

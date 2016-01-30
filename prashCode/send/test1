@@ -16,11 +16,12 @@ while
 
 begin
   x:=1;  % set x to 1!
-  y:=2;   /*
+  y:=2;   /* 
   z:=3;  
          % the really tricky thing is that 
-         % if I close a multiline comment, */ thus  in a 
+         % if I close a multiline comment */ thus  in a 
          % line comment it does not count!
+        
 end
 
 /* yet more comments
