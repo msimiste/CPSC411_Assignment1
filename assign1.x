@@ -15,7 +15,8 @@ tokens :-
   $white+               ;
   "%".*                 ;
   --"/*"[. $newLine]*"*/"     ;
-  "/*"[. $newLine]*"*/" {\p s -> COMMENT (helper s 0) p}
+ -- "/*"[. $newLine]*"*/" {\p s -> COMMENT (helper s 0) p}
+ "/*".*					{\p s -> COMMENT (helper s 0) p}
   
   if                    { \p s -> IF p }
   then                  { \p s -> THEN p }
