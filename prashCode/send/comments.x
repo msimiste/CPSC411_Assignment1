@@ -195,17 +195,20 @@ nested_comment input _ = do
                                 Just (c,input) | c == fromIntegral (ord '*') -> go (n+1) input
                                 Just (c,input)   -> go n input
                           '\37' -> do
-                                go (n-1) (singleComment input)
+                               go (fst retVal) (snd retVal) where
+                               retVal = singleComment n input
                              
                           c -> go n input
       err input = do 
         alexSetInput input;
         lexError $ "error in nested comment"
 
-singleComment :: AlexInput -> AlexInput
-singleComment (a,b,c,(d:e))
-    | d == '\n' = (a,b,c,e)
-    | otherwise = singleComment (a,b,c,e)
+singleComment :: Int -> AlexInput -> (Int, AlexInput)
+singleComment x (a,b,c,(d:e:f))
+    | d == '\n' =  (x, (a,b,c,e:f))
+    | d == '\47' && e == '*' = singleComment (x+1) (a,b,c,f)
+    | d == '*' && e =='\47' = singleComment (x-1) (a,b,c,f)
+    | otherwise = singleComment x (a,b,c,(e:f))
     
     
 showPosn (AlexPn _ line col) = show line ++ ':': show col
