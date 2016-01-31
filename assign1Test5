@@ -3,9 +3,19 @@
 
 % Author: Mike Simister
 % CPSC411 Winter 2016
-% Purpose: This set of tests will test for proper parsing all types of symbols and values associated with
+% Purpose: This set of tests will test for error checking
 % Assignment 1 for CPSC411
 % Date: January 28, 2016
 
-% assertions:
-% nested one line comments and multiline comments work
+
+x + 6 = 3  % will not recognize the symbol "="
+
+
+% to test for unbalenced multiline comments, comment out line 11 (above)
+% and uncomment line 19 (below):
+
+/*
+
+%/* this will offset the balence
+
+*/
