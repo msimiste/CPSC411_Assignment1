@@ -1,0 +1,56 @@
+
+
+% Author: Mike Simister
+% CPSC411 Winter 2016
+% Purpose: This set of tests will test for proper parsing of the keywords
+% 			ie if, then, while, do, input....etc
+% 			since single line comments must be included they are also tested as an added bonus
+% Date: January 28, 2016
+
+% these tests show that the compiler can handle special characters within an ID value
+s! 											% this should give the ID s!
+s3 											% this should give the ID s3
+s!3 										% this should give the ID s!3
+s!!!!!!!!!!!!!!!!!!!&&&34aht				% this is a legitimate ID if we are allowing special characters
+											% to be included as well as the $alpha[$alpha$digit]* combination
+											
+
+if
+then
+while
+do
+input
+else
+begin
+end
+write
+
+
+ifthenwhiledoinputelsebeginendwrite
+
+ifthen
+
+if (c := 5)
+
+then
+ 
+c := 9 * 4;
+
+else
+
+c := 78 -2;
+
+
+begin;
+
+begin ;
+
+
+dowhile
+
+do while
+											
+
+% id tests
+
+x179;yy567;A1234test;A1test2;1123x;t123ther123at56;

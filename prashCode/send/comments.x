@@ -37,7 +37,8 @@ $alpha[$alpha$digit]*        { word }
 "("                          { lpar }
 ")"                          { rpar }
 ";"                          { semicolon }
-"/*"                         { nested_comment } 
+"/*"                         { nested_comment }
+ 
 
 {
 
@@ -195,9 +196,12 @@ nested_comment input _ = do
                                 Just (c,input) | c == fromIntegral (ord '*') -> go (n+1) input
                                 Just (c,input)   -> go n input
                           '\37' -> do
-                               go (fst retVal) (snd retVal) where
-                                   retVal = singleComment n input
-                             
+                               case alexGetByte input of
+                                Nothing  -> err input                                                           
+                                Just (c,input)   -> go keepN keepInput where
+                                  retVal = singleComment n input
+                                  keepN = fst retVal
+                                  keepInput = snd retVal                        
                           c -> go n input
       err input = do 
         alexSetInput input;

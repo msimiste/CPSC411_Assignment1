@@ -1,0 +1,23 @@
+
+
+% Author: Mike Simister
+% CPSC411 Winter 2016
+% Purpose: This set of tests will test for proper parsing of the single line comments
+% Date: January 28, 2016
+
+
+% singleline comment test
+
+% this % whole line % should not % appear */ even with the start of /* multi line
+comments
+
+x := 3 % x is 3;
+
+% all 
+% of 
+% these
+% words 
+except 
+for this one
+% are hidden 
+
