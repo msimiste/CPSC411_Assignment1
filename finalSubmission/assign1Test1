@@ -1,0 +1,26 @@
+
+
+% Author: Mike Simister
+% CPSC411 Winter 2016
+% Purpose: This set of tests will test for proper parsing of the symbols
+% 			ie ADD, ASSIGN, SUB MUL etc
+% 			since single line comments must be included they are also tested as an added bonus
+% Date: January 28, 2016
+
+5 													% should be a NUM value
+9223372036854775807									% should be the largest NUM value (signed 64bit INT)
+9223372036854775808									% test to see what happens with overflow (should be a negative value)
+18446744073709551617789								% extreme overflow test
+
+5 + 4									
+
+
+
++-*/;()/:=											% test all symbols
+
+++--**//;;:=:=										% notice in this test and the one above that
+													% */ is not recognized as a comment since there was no 
+													% opening multi line comment (/*)
+
+(9227645 * (7547 + 34534534) - (12345/6789) / 3)/4;  %typical statement
+

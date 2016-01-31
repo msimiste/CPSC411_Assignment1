@@ -1,0 +1,60 @@
+
+
+% Author: Mike Simister
+% CPSC411 Winter 2016
+% Purpose: This set of tests will test for proper parsing of the multi line comments
+% Date: January 28, 2016
+
+
+/*
+
+none of these operations will be used
+
+x := 6
+
+6 + 7 ;
+
+begin
+
+end;
+
+*/
+
+x := 90;
+
+if( y := 7)
+
+then 
+
+begin
+
+input := this is a test;
+
+end;
+
+/* this will test /* nested comments in one */ line */
+
+
+/* this will test /*
+the ability for the nested comments to 
+span more than one line */
+even though it is probably not 
+necessary */
+
+/* this will test if the % single line */ comments take precedence over the
+multiline
+comments */
+
+/*
+    This is a test /*  % skip */ this part
+
+*/
+
+
+*/x+2*3; /* % output should just be ID "x" ADD NUM 2 MUL 3 SEMICOLON
+
+*/
+
+/******** notice that the multiline comments can have as many *** symbols as we wish it to have
+
+*******even here***************************************************/

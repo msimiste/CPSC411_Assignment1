@@ -3,13 +3,18 @@
 
 CC=ghc
 
+.SILENT:
+
 all: first second third
-	
-first: assign1
+
+
+second: assign1.hs
+	ghc --make assign1.hs
+		
+first: assign1.x
 	alex assign1.x
 	
-second: assign1
-	ghc --make assign1.hs
+
 	
 third: assign1Test1 assign1Test2 assign1Test3 assign1Test4 assign1Test5
 	@echo
@@ -39,6 +44,6 @@ third: assign1Test1 assign1Test2 assign1Test3 assign1Test4 assign1Test5
 	@./assign1 assign1Test5
 	
 clean: 
-	rm -f *.hs *.exe *.hi
+	@rm -f *.hs *.exe *.hi *.o
 	
 
