@@ -44,6 +44,7 @@ $alpha[$alpha$digit]*        				{ word }
 "/*"                         				{ nested_comment }
 
 -- the line below will only be used if special chars are allowed to be included in ID values
+
 $alpha[$other$alpha$digit]*              	{ word } 
 
 {
@@ -214,9 +215,9 @@ nested_comment input _ = do
         lexError $ "error in nested comment"
 
 singleComment :: Int -> AlexInput -> (Int, AlexInput)
-singleComment x (a,b,c,(d:e:f))
-    | d == '\n' =  (x, (a,b,c,e:f))    
-    | otherwise = singleComment x (a,b,c,(e:f))
+singleComment x (a,b,c,(d:e:g))
+    | d == '\n' =  (x, (a,b,c,e:g))    
+    | otherwise = singleComment x (a,b,c,(e:g))
 singleComment x s = (x,s)
     
     
